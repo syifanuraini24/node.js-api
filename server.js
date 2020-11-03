@@ -4,6 +4,8 @@ const mongoose = require ('mongoose')
 require('dotenv').config()
 
 const authRoute = require('./routes/auth')
+const productRoute = require('./routes/product')
+
 
 const app = express()
 mongoose.connect(process.env.MONGODB, {useNewUrlParser: true, useUnifiedTopology: true}, (err)=>{
@@ -19,7 +21,7 @@ app.use(bodyParser.json())
 //     return res.json("Hello word")
 // })
 
-app.use('/api',authRoute)
+app.use('/api',authRoute, productRoute)
 const server = app.listen(process.env.PORT|| 3000, (err)=>{
     if(err) return console.log(err)
     console.log(`Server is running on port ${server.address().port}`)
